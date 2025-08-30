@@ -1,0 +1,36 @@
+name: Grype scan via GHA
+
+on:
+    push:
+     branches:
+      - main
+    workflow_dispatch:
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compile Code
+        run: echo "Compiling..."
+
+      - name: Produce Binary
+        run: sleep 5
+
+      - name: Push binary
+        run: echo "Pushing Binary to ECR..."
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Grype scan
+        uses: cloudbees-io-gha/grype-scan-publish@v1
+        with:
+          cloudbees-pat: ${{ secrets.CBP_PAT_QA }}
+          binary-tar-path: ./golang-alpine.tar
+          
+          
+         
