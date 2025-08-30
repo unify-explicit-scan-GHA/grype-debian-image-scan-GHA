@@ -29,7 +29,7 @@ jobs:
       - name: Grype scan
         uses: cloudbees-io-gha/grype-scan-publish@v1
         with:
-          cloudbees-pat: ${{ secrets.CBP_PAT_QA }}
+          cloudbees-url: https://api.saas-qa.beescloud.com
           binary-tar-path: ./golang-alpine.tar
           
           
