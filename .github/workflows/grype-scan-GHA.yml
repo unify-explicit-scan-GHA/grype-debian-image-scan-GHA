@@ -30,6 +30,7 @@ jobs:
         uses: cloudbees-io-gha/grype-scan-publish@v1
         with:
           binary-tar-path: ./debian.tar
+          cloudbees-pat: ${{ secrets.CLOUDBEES_PAT }}
           
           
          
