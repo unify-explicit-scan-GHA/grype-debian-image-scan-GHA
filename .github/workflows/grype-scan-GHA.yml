@@ -14,23 +14,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Compile Code
-        run: echo "Compiling..."
-
-      - name: Produce Binary
-        run: sleep 5
-
-      - name: Push binary
-        run: echo "Pushing Binary to ECR..."
-
       - name: Check out repository code
         uses: actions/checkout@v3
 
-      - name: Grype scan
+      - name: Create empty JSON file in workspace
+        run: |
+          FILE_PATH="$GITHUB_WORKSPACE/store/request/request.json"
+          mkdir -p "$(dirname "$FILE_PATH")"
+          touch "$FILE_PATH"
+          echo "File created at: $FILE_PATH"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t vulnerable-debian .
+
+      # Step 4: Save the Docker image as a TAR file
+      - name: Save Docker image as TAR file
+        run: |
+          docker save -o output.tar vulnerable-debian
+          tar -tf output.tar
+          
+      - id: grype-step
+        name: Grype scan
         uses: cloudbees-io-gha/grype-scan-publish@v1
         with:
-          binary-tar-path: debian.tar
+          binary-tar-path: output.tar
           cloudbees-url: https://api.saas-qa.beescloud.com
+         
+
+      # - name: Grype scan
+      #   uses: cloudbees-io-gha/grype-scan-publish@v1
+      #   with:
+      #     binary-tar-path: debian.tar
+      #     cloudbees-url: https://api.saas-qa.beescloud.com
          
           
           
