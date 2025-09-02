@@ -17,12 +17,12 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
-      - name: Create empty JSON file in workspace
-        run: |
-          FILE_PATH="$GITHUB_WORKSPACE/store/request/request.json"
-          mkdir -p "$(dirname "$FILE_PATH")"
-          touch "$FILE_PATH"
-          echo "File created at: $FILE_PATH"
+      # - name: Create empty JSON file in workspace
+      #   run: |
+      #     FILE_PATH="$GITHUB_WORKSPACE/store/request/request.json"
+      #     mkdir -p "$(dirname "$FILE_PATH")"
+      #     touch "$FILE_PATH"
+      #     echo "File created at: $FILE_PATH"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
