@@ -29,12 +29,12 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t vulnerable-debian .
+          docker build -t vulnerable-python-app .
 
       # Step 4: Save the Docker image as a TAR file
       - name: Save Docker image as TAR file
         run: |
-          docker save -o output.tar vulnerable-debian
+          docker save -o output.tar vulnerable-python-app
           tar -tf output.tar
           
       - id: grype-step
