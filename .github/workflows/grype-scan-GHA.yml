@@ -29,8 +29,9 @@ jobs:
       - name: Grype scan
         uses: cloudbees-io-gha/grype-scan-publish@v1
         with:
-          binary-tar-path: ./debian.tar
-          cloudbees-pat: ${{ secrets.CLOUDBEES_PAT }}
+          binary-tar-path: debian.tar
+          cloudbees-url: https://api.saas-qa.beescloud.com
+         
           
           
          
