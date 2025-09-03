@@ -1,20 +1,20 @@
-# Use a potentially vulnerable older Python version
-FROM python:3.6-slim
+# Use an older Node.js version (e.g. Node 12, which is EOL and potentially vulnerable)
+FROM node:12
 
-# Set the working directory inside the container
-WORKDIR /app
+# Create app directory
+WORKDIR /usr/src/app
 
-# Copy the application files into the container
-COPY . /app
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-# Upgrade pip (optional but helpful)
-RUN pip install --upgrade pip
+# Install dependencies (some may be outdated/vulnerable)
+RUN npm install
 
-# Install required Python packages
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy the rest of the app
+COPY . .
 
-# Expose the Flask default port
-EXPOSE 5000
+# Expose the app port
+EXPOSE 3000
 
-# Run the application
-CMD ["python", "app.py"]
+# Start the app
+CMD ["node", "app.js"]
