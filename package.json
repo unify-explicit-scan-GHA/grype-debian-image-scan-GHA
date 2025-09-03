@@ -1,0 +1,13 @@
+{
+  "name": "vulnerable-node-light",
+  "version": "1.0.0",
+  "description": "A deliberately vulnerable Node.js app for testing",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "4.16.0",         // Known to have some issues
+    "lodash": "4.17.11"          // Known vulnerable version
+  }
+}
