@@ -29,12 +29,12 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t vulnerable-python-app .
+          docker build -t vulnerable-node-light .
 
       # Step 4: Save the Docker image as a TAR file
       - name: Save Docker image as TAR file
         run: |
-          docker save -o output.tar vulnerable-python-app
+          docker save -o output.tar vulnerable-node-light
           tar -tf output.tar
           
       - id: grype-step
