@@ -1,1 +1,1 @@
-# trivy-alpine-image-scan
+# grype-node-image-scan
